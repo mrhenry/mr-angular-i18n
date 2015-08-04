@@ -1,12 +1,12 @@
 import {fetchSetup, fetchTranslations} from './Api';
 import {ng} from 'fd-angular-core';
 
-let $current = new Symbol('$current');
-let $default = new Symbol('$default');
-let $locales = new Symbol('$locales');
-let $cache = new Symbol('$cache');
-let $setup = new Symbol('$setup');
-let $fetchSetup = new Symbol('$fetchSetup');
+let $current = Symbol('$current');
+let $default = Symbol('$default');
+let $locales = Symbol('$locales');
+let $cache = Symbol('$cache');
+let $setup = Symbol('$setup');
+let $fetchSetup = Symbol('$fetchSetup');
 
 /**
 @namespace I18n

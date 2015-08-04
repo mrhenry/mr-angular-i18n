@@ -47,12 +47,12 @@ var _Api = require('./Api');
 
 var _fdAngularCore = require('fd-angular-core');
 
-var $current = new Symbol('$current');
-var $default = new Symbol('$default');
-var $locales = new Symbol('$locales');
-var $cache = new Symbol('$cache');
-var $setup = new Symbol('$setup');
-var $fetchSetup = new Symbol('$fetchSetup');
+var $current = Symbol('$current');
+var $default = Symbol('$default');
+var $locales = Symbol('$locales');
+var $cache = Symbol('$cache');
+var $setup = Symbol('$setup');
+var $fetchSetup = Symbol('$fetchSetup');
 
 /**
 @namespace I18n
@@ -245,8 +245,8 @@ var _fdAngularCore = require('fd-angular-core');
 
 var _index = require('./index');
 
-var $current = new Symbol('$current');
-var $translations = new Symbol('$translations');
+var $current = Symbol('$current');
+var $translations = Symbol('$translations');
 
 /**
 @function mountI18n

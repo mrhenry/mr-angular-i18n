@@ -1,8 +1,8 @@
 import {buildUiRouterState, mountAt, State} from 'fd-angular-core';
 import {I18n} from './index';
 
-let $current = new Symbol('$current');
-let $translations = new Symbol('$translations');
+let $current = Symbol('$current');
+let $translations = Symbol('$translations');
 
 /**
 @function mountI18n
