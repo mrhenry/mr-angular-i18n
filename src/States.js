@@ -1,4 +1,4 @@
-import {buildUiRouterState, mountAt, State} from 'fd-angular-core';
+import {buildUiRouterState, mountAt, State, Inject} from 'fd-angular-core';
 import {I18n} from './index';
 
 let $current = Symbol('$current');
@@ -43,13 +43,13 @@ function mountI18nLocale(locale, child) {
 	}
 
 	return {
-		state:  I18nController::mountAt(url, { name }),
-		locale: locale,
-		child:  child,
-		build:  build,
+		state:              I18nController::mountAt(url, { name }),
+		locale:             locale,
+		child:              child,
+		buildUiRouterState: build,
 	};
 
-	function build(options) {
+	function build(options={}) {
 		options = Object.create(options, {});
 		if (this.locale === $current) {
 			options.locale = null;
@@ -81,7 +81,6 @@ function mountI18nLocale(locale, child) {
 }
 
 @State({
-	hidden:   true,
 	bindTo:   'I18n',
 	template: `<ui-view></ui-view>`,
 })

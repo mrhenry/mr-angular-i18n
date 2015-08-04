@@ -315,11 +315,13 @@ function mountI18nLocale(locale, child) {
 		state: _fdAngularCore.mountAt.call(I18nController, url, { name: name }),
 		locale: locale,
 		child: child,
-		build: build
+		buildUiRouterState: build
 	};
 
-	function build(options) {
+	function build() {
 		var _this = this;
+
+		var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
 		options = Object.create(options, {});
 		if (this.locale === $current) {
@@ -389,9 +391,8 @@ var I18nController = (function () {
 	}]);
 
 	var _I18nController = I18nController;
-	I18nController = Inject('$translations', '$locale')(I18nController) || I18nController;
+	I18nController = (0, _fdAngularCore.Inject)('$translations', '$locale')(I18nController) || I18nController;
 	I18nController = (0, _fdAngularCore.State)({
-		hidden: true,
 		bindTo: 'I18n',
 		template: '<ui-view></ui-view>'
 	})(I18nController) || I18nController;
