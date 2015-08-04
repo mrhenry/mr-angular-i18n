@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+- '0.12'
+script: |
+  npm run-script build
+  npm test
+  npm run-script deploy-doc
+deploy:
+  provider: npm
+  email: simon.menke@gmail.com
+  api_key:
+    secure: hSt15h3y8S9IHPRqJTpZlRSnL5a13vg8d/i0hvrkFM75mqWBo/IfBPtPsDgsWivUfb+7xtJ8tWlsxrs2Qf96HIcA1CmcT7QIBCtwv5p/rfDsWHwQOwdqbI2Es/mTjeS9y2hF3iUuqBMpkJDJghr8NdjsLShwPeRBGQM+UFPfhnKBIJUla9yT/kTcmY8XPBKCYfREM4LJYaygWGAPgV9+vUNWmnyWGfL0E3xMN7bj6tk4i45WyLvt5fcrCH/2IG4hNTtkcNYunqCFGTStQA4JbDsqGJZiMktTZ/iWGOhBGDPfNMlKEmAkLqeWahVqWyR52G35Tcan9PFLmmUVcg1Mstd2cQzR/paSXit6g/VitEx4epqf8g3F66BIFEsaAYisVRAZLeKA95urSuyEizQoB98m0LdJh+uL5tgIuQMiuPPOBvgl0K7EYOESk6SHOOa+A9Ia/Ib4sHF2X0mFwqfW6ngAF6/gc+ZooNfaBHh/tab352gZIRHZva7iOrzihnnLI6R2QylcK4Xjc3qUf1ZBx4dodFzt1ffPr93/Mk149CKYIvVKLutgPBwGVFPY9x0kQ04ltsOtdoH6mZSGwX7FwK0vOviL0LHd4wT9F+4ziyFP6PAZ3OVN+I6mNt42h2CpF/W4E8hseWuNCZ0r1l4CQq9aYUMtYe53UdoCFFSYD3U=
+  on:
+    tags: true
+    repo: mrhenry/mr-angular-i18n
+env:
+  global:
+    secure: eKpD+2HyTAsKwUWklTB/9OxFU3O/a6G6nrdG5YF4MVYi3W3XHlLmzB3VEM19f0bNCiNFZSTX9rZhwSri/bfRWVrQRCmY/x/Qikwt8RdR+NF0HvOh9j/wapvD/ClD8h+ExICxs0VW18CsPp9GbW0ltO0fJapioyB/p/k0XKNbLq7zvWfHcpTOuNsTG1Q4Jf+cv7ffFw7spLV0H0OqneBNaLjtanrawcRId2vWNEXHJzQdgfOXvjWv3sbc3S2J4VMSH1LlmsIcroy7UIbqyJdrauYuZ93smLT/5Dr+r6h6ODyp3iJCr4NB0bT/IHSGa5xoAUyYGVijxTPM5plw3WFgpLnXYmBsbqKqcyrxiVP1ToE/fmcvlU2Da9BnyCAHKv3QJV4rV+9bqAsR8xvmaKkJBuojx6FpUmMDRwGy2pUpjpSEBPqTyTojNxdsJBLeSrDrBd3w5xFRyRwLYUQl0pzyvMM5BTyc7a+D5P8aONEpQ/gL1L1jUP/YF/wtC3Jeo0cIY2heWCtvIUu054Xj25Klub81uX40DjApw9Ds7bD80NjFGetec2Mbm7Ke3bN8nkXmXfWZE2v6VXqdY652nKOz9W/N+Z70ep/4r7yHYvendNmlvolCAxU9WZWt7S1qqr0w8MogPvGFYV7ZLnHwk3Qw/jReSLigRui7U2Ecc4qeFtI=

@@ -1,0 +1,39 @@
+{
+  "name": "mr-angular-i18n",
+  "version": "0.0.0",
+  "description": "Helpers for dealing with Lalala localization in angular",
+  "repository": "https://github.com/mrhenry/mr-angular-i18n.git",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo 'No tests...'",
+    "deploy-doc": "make deploy",
+    "build": "make"
+  },
+  "keywords": [
+    "utils",
+    "angular"
+  ],
+  "author": "Simon Menke",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.4.7",
+    "babel-eslint": "^4.0.5",
+    "browserify": "^10.2.3",
+    "eslint": "^0.24.1",
+    "exorcist": "^0.4.0",
+    "jsdoc": "^3.3.2"
+  },
+  "dependencies": {
+    "fd-angular-core": "0.x.x",
+    "mr-util": "0.x.x"
+  },
+  "jspm": {
+    "jspmNodeConversion": false,
+    "format": "es6",
+    "main": "src/index.js",
+    "dependencies": {
+      "fd-angular-core": "npm:fd-angular-core",
+      "mr-util": "npm:mr-util"
+    }
+  }
+}
