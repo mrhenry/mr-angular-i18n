@@ -50,7 +50,12 @@ function mountI18nLocale(locale, child) {
 	};
 
 	function build(options) {
-		options.locale = this.local;
+		options = Object.create(options, {});
+		if (this.locale === $current) {
+			options.locale = null;
+		} else {
+			options.locale = this.local;
+		}
 
 		let state = buildUiRouterState(this.state, options);
 
@@ -58,7 +63,7 @@ function mountI18nLocale(locale, child) {
 		if (!state.resolve) {
 			state.resolve = {};
 		}
-		if (locale === $current) {
+		if (this.locale === $current) {
 			state.resolve.$locale = () => { return I18n.current; };
 		} else {
 			state.resolve.$locale = () => { return this.locale; };
