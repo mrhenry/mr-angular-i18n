@@ -7,20 +7,23 @@ clean:
 	rm -r lib dist doc
 
 doc: dist
-	jsdoc -r -d ./doc ./dist/*.js
+	./node_modules/.bin/jsdoc -r -d ./doc ./dist/*.js
 	@touch doc
 
 lib: $(SRC_FILES)
-	babel --out-dir=lib --source-maps=true --module=umdStrict --stage=0 src
+	./node_modules/.bin/babel --out-dir=lib --source-maps=true --module=umdStrict --stage=0 src
 	@touch lib
 
 dist: lib $(LIB_FILES)
 	@mkdir -p dist
-	browserify lib/index.js -o dist/mr-angular-i18n.raw.js --standalone=MrAngularI18n --extension=js --debug \
+	./node_modules/.bin/browserify lib/index.js -o dist/mr-angular-i18n.raw.js --standalone=MrAngularI18n --extension=js --debug \
 		--exclude fd-angular-core \
 		--exclude mr-util
-	cat dist/mr-angular-i18n.raw.js | exorcist dist/mr-angular-i18n.js.map > dist/mr-angular-i18n.js
+
+	cat dist/mr-angular-i18n.raw.js | ./node_modules/.bin/exorcist dist/mr-angular-i18n.js.map > dist/mr-angular-i18n.js
+
 	rm dist/mr-angular-i18n.raw.js
+
 	@touch dist
 
 deploy: doc

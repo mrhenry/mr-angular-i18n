@@ -496,7 +496,7 @@ function translate(translations, key, replace) {
     }
   }
 
-  if (!!replace) {
+  if (replace !== undefined) {
     if (typeof replace === 'object') {
       for (var _key in replace) {
         var value = replace[_key];

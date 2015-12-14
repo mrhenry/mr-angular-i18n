@@ -16,12 +16,12 @@
   "author": "Simon Menke",
   "license": "MIT",
   "devDependencies": {
-    "babel": "^5.4.7",
+    "babel": "^5.8.33",
     "babel-eslint": "^4.0.5",
     "browserify": "^10.2.3",
     "eslint": "^0.24.1",
     "exorcist": "^0.4.0",
-    "jsdoc": "^3.3.2"
+    "jsdoc": "^3.4.0"
   },
   "dependencies": {
     "fd-angular-core": "1.x.x",

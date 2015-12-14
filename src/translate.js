@@ -30,7 +30,7 @@ export function translate (translations, key, replace, options = { translateCame
     }
   }
 
-  if (!!replace) {
+  if (replace !== undefined) {
     if (typeof replace === 'object') {
       for (let key in replace) {
         let value = replace[key];
