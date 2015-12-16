@@ -59,8 +59,8 @@ var $fetchSetup = Symbol('$fetchSetup');
 */
 
 var I18n = (function () {
-	function I18n() {
-		_classCallCheck(this, I18n);
+	function I18n($rootScope) {
+		_classCallCheck(this, _I18n);
 
 		this[$cache] = {};
 	}
@@ -82,18 +82,44 @@ var I18n = (function () {
 
 			this[$setup] = (0, _Api.fetchSetup)().then(function (setup) {
 				_this[$default] = setup['default'];
-				_this[$current] = setup['default'];
 				_this[$locales] = setup.locales;
-
-				if (navigator.language) {
-					var locale = navigator.language.split('-')[0];
-					if (setup.locales.indexOf(locale)) {
-						_this[$current] = locale;
-					}
-				}
+				_this[$current] = _this.extractLocaleFromPath(window.location.pathname);
 			});
 
 			return this[$setup];
+		}
+	}, {
+		key: 'extractLocaleFromPath',
+		value: function extractLocaleFromPath(path) {
+			var locale = undefined;
+
+			if (path.indexOf('/') === 0) {
+				path = path.slice(1);
+			}
+
+			locale = path.split('/');
+
+			if (!!locale[0] && locale[0].length === 2 && this[$locales].indexOf(locale[0]) > -1) {
+				return locale[0];
+			}
+
+			if (navigator.language) {
+				return navigator.language.split('-')[0];
+			}
+
+			return this[$default];
+		}
+	}, {
+		key: 'update',
+		value: function update() {
+			var locale = this.extractLocaleFromPath(window.location.pathname);
+
+			if (locale !== this[$current]) {
+				this[$current] = locale;
+				return true;
+			}
+
+			return false;
 		}
 
 		/**
@@ -146,6 +172,33 @@ var I18n = (function () {
 		}
 
 		/**
+  Returns the canonical version for the current absUrl
+  	@memberof I18n
+  */
+	}, {
+		key: 'canonical',
+		get: function get() {
+			var url = window.location.href,
+			    locale = /\/([a-z]{2})\//gi.exec(url);
+
+			if (locale) {
+				if (locale[1] === this[$default]) {
+					url = url.split('/');
+					url.splice(3, 1);
+					url = url.join('/');
+				}
+			} else {
+				if (this[$current] !== this[$default]) {
+					url = url.split('/');
+					url.splice(3, 0, this[$current]);
+					url = url.join('/');
+				}
+			}
+
+			return url;
+		}
+
+		/**
   Returns the list of available locales.
   	@var {String[]} locales
   @memberof I18n
@@ -157,6 +210,8 @@ var I18n = (function () {
 		}
 	}]);
 
+	var _I18n = I18n;
+	I18n = (0, _fdAngularCore.Inject)('$rootScope')(I18n) || I18n;
 	return I18n;
 })();
 

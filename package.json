@@ -1,6 +1,6 @@
 {
   "name": "mr-angular-i18n",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Helpers for dealing with Lalala localization in angular",
   "repository": "https://github.com/mrhenry/mr-angular-i18n.git",
   "main": "lib/index.js",

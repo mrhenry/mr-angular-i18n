@@ -1,5 +1,5 @@
 import {fetchSetup, fetchTranslations} from './Api';
-import {ng} from 'fd-angular-core';
+import {ng, Inject} from 'fd-angular-core';
 
 let $current = Symbol('$current');
 let $default = Symbol('$default');
@@ -12,9 +12,10 @@ let $fetchSetup = Symbol('$fetchSetup');
 @namespace I18n
 */
 
+@Inject('$rootScope')
 export class I18n {
 
-	constructor() {
+	constructor($rootScope) {
 		this[$cache] = {};
 	}
 
@@ -27,6 +28,32 @@ export class I18n {
 	get current() { return this[$current]; }
 
 	get default() { return this[$default]; }
+
+	/**
+	Returns the canonical version for the current absUrl
+
+	@memberof I18n
+	*/
+	get canonical() {
+		let url = window.location.href,
+			locale = (/\/([a-z]{2})\//gi).exec(url);
+
+		if (locale) {
+			if (locale[1] === this[$default]) {
+				url = url.split('/');
+				url.splice(3, 1);
+				url = url.join('/');
+			}
+		} else {
+			if (this[$current] !== this[$default]) {
+				url = url.split('/');
+				url.splice(3, 0, this[$current]);
+				url = url.join('/');
+			}
+		}
+
+		return url;
+	}
 
 	/**
 	Returns the list of available locales.
@@ -44,18 +71,42 @@ export class I18n {
 		this[$setup] = fetchSetup()
 			.then(setup => {
 				this[$default] = setup.default;
-				this[$current] = setup.default;
 				this[$locales] = setup.locales;
-
-				if (navigator.language) {
-					let locale = navigator.language.split('-')[0];
-					if (setup.locales.indexOf(locale)) {
-						this[$current] = locale;
-					}
-				}
+				this[$current] = this.extractLocaleFromPath(window.location.pathname);
 			});
 
 		return this[$setup];
+	}
+
+	extractLocaleFromPath(path) {
+		let locale;
+
+		if (path.indexOf('/') === 0) {
+			path = path.slice(1);
+		}
+
+		locale = path.split('/');
+
+		if (!!locale[0] && locale[0].length === 2 && this[$locales].indexOf(locale[0]) > -1) {
+			return locale[0];
+		}
+
+		if (navigator.language) {
+			return navigator.language.split('-')[0];
+		}
+
+		return this[$default];
+	}
+
+	update() {
+		let locale = this.extractLocaleFromPath(window.location.pathname);
+
+		if (locale !== this[$current]) {
+			this[$current] = locale;
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
