@@ -100,11 +100,15 @@ var I18n = (function () {
 			locale = path.split('/');
 
 			if (!!locale[0] && locale[0].length === 2 && this[$locales].indexOf(locale[0]) > -1) {
-				return locale[0];
+				locale = locale[0];
+			} else if (navigator.language) {
+				locale = navigator.language.split('-')[0];
+			} else {
+				locale = this[$default];
 			}
 
-			if (navigator.language) {
-				return navigator.language.split('-')[0];
+			if (this[$locales].includes(locale)) {
+				return locale;
 			}
 
 			return this[$default];
